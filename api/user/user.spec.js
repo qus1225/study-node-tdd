@@ -1,6 +1,7 @@
 const request = require("supertest");
 const should = require("should");
-const app = require("./index");
+// 루트의 index파일을 씀
+const app = require("../../");
 
 describe("GET /users는", () => {
   describe("성공시", () => {

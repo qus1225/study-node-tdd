@@ -1,27 +1,18 @@
 const exprses = require("express");
 const app = exprses();
 const morgan = require("morgan");
+const bodyParser = require('body-parser');
+const user = require('./api/user');
 
-const users = [
-  { id: 1, name: "alice" },
-  { id: 2, name: "bek" },
-  { id: 3, name: "chris" }
-];
+// TODO: cmd에서 NODE_ENV적용하는 법 알아내서 하기
+if (process.env.NODE_ENV !== 'test') {
+    app.use(morgan("dev"));
+}
 
-app.use(morgan("dev"));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true})); // for parsing application/x-www-fomr-urlencoded
 
-app.get("/users", function(req, res) {
-  req.query.limit = req.query.limit || 10;
-  const limit = parseInt(req.query.limit, 10);
-  if (Number.isNaN(limit)) {
-    // response할때는 return으로 끝나는게 아니라 end()를 콜해야줘야함
-    return res.status(400).end();
-  }
-  res.json(users.slice(0, limit));
-});
-
-app.listen(3000, () => {
-  console.log("App is listening on port 3000!");
-});
+// Router클래스로 route 모듈화
+app.use('/users', user);
 
 module.exports = app;
