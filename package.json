@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000s\u0000t\u0000u\u0000d\u0000y\u0000-\u0000n\u0000o\u0000d\u0000e\u0000-\u0000t\u0000d\u0000d\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "set NODE_ENV=test&&mocha api/user/user.spec.js",
+    "test": "set NODE_ENV=test&&mocha api/user/user.spec.js -w",
     "start": "node bin/www.js"
   },
   "repository": {
